@@ -59,48 +59,58 @@ Peter.study()
 
 
 class Academy:
-    __name = "name"
-
     def __init__(self, name):
         self.name = name
+        self.teachers = []
+        self.students = []
+        self.subjects = []
 
-    @property
-    def name(self):
-        return self.__name
+    def add_teacher(self, teacher):
+        self.teachers.append(teacher)
 
-    @name.setter
-    def name(self, name):
-        self.__name = name
+    def add_student(self, student):
+        self.students.append(student)
+
+    def add_subject(self, subject):
+        self.subjects.append(subject)
 
     def show_info(self):
-        print(f"Name: {self.name}")
+        print(f"Name: {self.name}, teachers: {self.teachers}, students: {self.students}.")
 
 
-class Subject(Academy):
-    def __init__(self, name, hours, materials):
-        super().__init__(name)
-        self.hours = hours
-        self.materials = materials
-
-    def lesson(self):
-        print(f"This week we have {self.hours} hours of {self.name} and use {self.materials}.")
+academy = Academy("NTU")
+academy.add_teacher("Tom")
+academy.add_student(["Ann", "Jack", "Peter"])
+academy.add_subject("Maths")
+academy.show_info()
 
 
-English = Subject("English", 6, "workbooks")
-English.show_info()
-English.lesson()
+class Subject:
+    def __init__(self, name, teacher):
+        self.name = name
+        self.teacher = teacher
+        self.students = []
+
+    def add_student(self, student):
+        self.students.append(student)
+
+    def show_info(self):
+        print(f"Name: {self.name}, teachers: {self.teacher}, students: {self.students}.")
+
+
+chemistry = Subject("chemistry", "Ivan")
+chemistry.add_student(["Ann", "Jack", "Peter"])
+chemistry.show_info()
 
 
 class Examination(Subject):
-    def __init__(self, name, hours, materials, date):
-        super().__init__(name, hours, materials)
+    def __init__(self, name, teacher, date):
+        super().__init__(name, teacher)
         self.date = date
 
     def happen(self):
-        print(f"{self.name} exam will be happen {self.date} and will be continue for {self.hours} hours. "
-              f"You can use {self.materials} materials.")
+        print(f"Name: {self.name}, teacher: {self.teacher}, date: {self.date}.")
 
 
-Maths = Examination("Maths", 2, "no", "25/11/2023")
-Maths.show_info()
+Maths = Examination("Maths", "John", "25/11/2023")
 Maths.happen()
